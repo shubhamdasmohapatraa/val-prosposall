@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Princess 👑❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Nunito:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffd6e7 0%, #c1f0ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        /* Cloud Background */
+        .cloud-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            animation: floatCloud linear infinite;
+            opacity: 0.8;
+        }
+        
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .cloud:before {
+            width: 60px;
+            height: 60px;
+            top: -20px;
+            left: 20px;
+        }
+        
+        .cloud:after {
+            width: 40px;
+            height: 40px;
+            top: -15px;
+            right: 20px;
+        }
+        
+        @keyframes floatCloud {
+            to {
+                transform: translateX(-100vw);
+            }
+        }
+        
+        /* Cartoon Characters */
+        .character {
+            position: absolute;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+        
+        .boy {
+            width: 120px;
+            height: 180px;
+            bottom: 50px;
+            left: 10%;
+            animation: bounce 2s infinite alternate;
+        }
+        
+        .girl {
+            width: 120px;
+            height: 180px;
+            bottom: 50px;
+            right: 10%;
+            animation: bounce 2s infinite alternate-reverse;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+        
+        /* Chat Bubbles */
+        .chat-bubble {
+            position: absolute;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 20px;
+            max-width: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-family: 'Comic Neue', cursive;
+            z-index: 20;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .chat-bubble.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .chat-bubble:after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+        }
+        
+        .bubble-left:after {
+            left: -10px;
+            top: 50%;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+            transform: translateY(-50%);
+        }
+        
+        .bubble-right:after {
+            right: -10px;
+            top: 50%;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+            transform: translateY(-50%);
+        }
+        
+        .boy-bubble {
+            bottom: 230px;
+            left: 15%;
+        }
+        
+        .girl-bubble {
+            bottom: 230px;
+            right: 15%;
+        }
+        
+        /* Main Card */
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+            text-align: center;
+            margin: 0 auto;
+            max-width: 800px;
+            position: relative;
+            border: 8px solid #ffb6c1;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: cardEntrance 1s forwards 0.5s;
+        }
+        
+        @keyframes cardEntrance {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .card-title {
+            font-family: 'Short Stack', cursive;
+            font-size: 3.5rem;
+            color: #ff4081;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 #ffd6e7;
+        }
+        
+        .card-subtitle {
+            font-size: 1.5rem;
+            color: #ff80ab;
+            margin-bottom: 30px;
+        }
+        
+        /* Love Messages */
+        .message-box {
+            background: #fff9fb;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 4px dashed #ffb6c1;
+            position: relative;
+        }
+        
+        .message-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #ffb6c1 0%, #ffb6c1 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.3em;
+            background-position: 0 88%;
+            padding: 0 5px;
+            font-weight: bold;
+            color: #d81b60;
+        }
+        
+        /* Step 1: Love Confirmation */
+        .step {
+            display: none;
+            animation: fadeIn 0.8s forwards;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .question {
+            font-family: 'Comic Neue', cursive;
+            font-size: 2.2rem;
+            color: #ff4081;
+            margin: 30px 0;
+            padding: 15px;
+            background: #fff0f5;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        
+        /* Love Meter */
+        .love-meter {
+            width: 80%;
+            height: 30px;
+            background: #ffe6ee;
+            border-radius: 15px;
+            margin: 30px auto;
+            overflow: hidden;
+            border: 3px solid #ffb6c1;
+        }
+        
+        .love-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff4081, #ff80ab);
+            border-radius: 15px;
+            transition: width 2s ease;
+        }
+        
+        .love-text {
+            font-size: 1.5rem;
+            color: #ff4081;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Step 2: Proposal */
+        .ring-display {
+            font-size: 5rem;
+            margin: 20px 0;
+            animation: sparkle 2s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 10px gold); }
+        }
+        
+        .proposal-box {
+            background: linear-gradient(45deg, #fff0f5, #fffaf0);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 5px solid gold;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .proposal-box:before {
+            content: "💍";
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+        
+        .proposal-text {
+            font-size: 2rem;
+            color: #d81b60;
+            font-family: 'Short Stack', cursive;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Cute Animals */
+        .animals {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            z-index: 5;
+        }
+        
+        .bunny {
+            top: 20px;
+            left: 20px;
+            animation: hop 3s infinite;
+        }
+        
+        .panda {
+            top: 20px;
+            right: 20px;
+            animation: sway 4s infinite;
+        }
+        
+        @keyframes hop {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(-5deg); }
+        }
+        
+        @keyframes sway {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .cute-btn {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cute-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .cute-btn:hover:before {
+            left: 100%;
+        }
+        
+        .yes-love-btn {
+            background: linear-gradient(45deg, #ff4081, #ff80ab);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        .no-love-btn {
+            background: linear-gradient(45deg, #b0b0b0, #d0d0d0);
+            color: white;
+        }
+        
+        .yes-marry-btn {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            color: white;
+            animation: happyJump 1s infinite alternate;
+        }
+        
+        .no-marry-btn {
+            background: linear-gradient(45deg, #f44336, #ff7961);
+            color: white;
+            position: relative;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 64, 129, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4); }
+        }
+        
+        @keyframes happyJump {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+        
+        /* Floating Elements */
+        .floating-hearts, .floating-stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            animation: floatElement linear infinite;
+        }
+        
+        @keyframes floatElement {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+        
+        /* Celebration */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .celebration.active {
+            display: flex;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        .celebration-content {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 10px solid gold;
+            animation: celebrationPulse 1.5s infinite;
+        }
+        
+        @keyframes celebrationPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card { padding: 20px; }
+            .card-title { font-size: 2.5rem; }
+            .proposal-text { font-size: 1.5rem; }
+            .buttons { flex-direction: column; align-items: center; }
+            .cute-btn { width: 100%; max-width: 300px; }
+            .boy, .girl { width: 80px; height: 120px; }
+            .boy { left: 5%; }
+            .girl { right: 5%; }
+            .boy-bubble, .girl-bubble { max-width: 180px; font-size: 0.9rem; }
+        }
+        
+        /* Custom Cursor */
+        .heart-cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cute Cursor -->
+    <div class="heart-cursor">❤️</div>
+    
+    <!-- Cloud Background -->
+    <div class="cloud-bg" id="cloud-bg"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+    <div class="floating-stars" id="floating-stars"></div>
+    
+    <!-- Cartoon Characters -->
+    <div class="character boy">
+        <svg viewBox="0 0 120 180">
+            <!-- Boy character SVG -->
+            <circle cx="60" cy="40" r="25" fill="#ffcc80"/>
+            <rect x="45" y="65" width="30" height="60" rx="15" fill="#64b5f6"/>
+            <rect x="40" y="125" width="40" height="30" rx="10" fill="#64b5f6"/>
+            <rect x="35" y="65" width="10" height="40" rx="5" fill="#64b5f6"/>
+            <rect x="75" y="65" width="10" height="40" rx="5" fill="#64b5f6"/>
+            <circle cx="50" cy="35" r="3" fill="white"/>
+            <circle cx="70" cy="35" r="3" fill="white"/>
+            <path d="M50 50 Q60 60 70 50" stroke="black" stroke-width="2" fill="none"/>
+            <circle cx="55" cy="25" r="2" fill="black"/>
+            <circle cx="65" cy="25" r="2" fill="black"/>
+        </svg>
+    </div>
+    
+    <div class="character girl">
+        <svg viewBox="0 0 120 180">
+            <!-- Girl character SVG -->
+            <circle cx="60" cy="40" r="25" fill="#ffccbc"/>
+            <path d="M45 65 L45 110 Q45 125 60 125 Q75 125 75 110 L75 65 Z" fill="#f48fb1"/>
+            <path d="M40 110 L80 110 L75 125 L45 125 Z" fill="#f48fb1"/>
+            <path d="M35 65 L45 65 L45 105 L35 105 Z" fill="#f48fb1" rx="5"/>
+            <path d="M75 65 L85 65 L85 105 L75 105 Z" fill="#f48fb1" rx="5"/>
+            <circle cx="50" cy="35" r="3" fill="white"/>
+            <circle cx="70" cy="35" r="3" fill="white"/>
+            <path d="M50 50 Q60 55 70 50" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M60 30 Q65 20 70 25" fill="none" stroke="#f48fb1" stroke-width="3"/>
+            <path d="M60 30 Q55 20 50 25" fill="none" stroke="#f48fb1" stroke-width="3"/>
+        </svg>
+    </div>
+    
+    <!-- Chat Bubbles -->
+    <div class="chat-bubble boy-bubble bubble-left" id="boy-bubble">
+        Hi my love! I have something special for you!
+    </div>
+    
+    <div class="chat-bubble girl-bubble bubble-right" id="girl-bubble">
+        Oh really? I'm excited! 😊
+    </div>
+    
+    <!-- Cute Animals -->
+    <div class="animals bunny">🐰</div>
+    <div class="animals panda">🐼</div>
+    
+    <!-- Main Card -->
+    <div class="card">
+        <h1 class="card-title">My Sweet Valentine 💖</h1>
+        <p class="card-subtitle">A magical journey just for you, my love</p>
+        
+        <!-- Step 1: Love Confirmation -->
+        <div class="step active" id="step1">
+            <div class="message-box">
+                <p class="message-text">
+                    My dearest <span class="highlight">[Devi Ji]</span>,<br><br>
+                    Every day with you feels like a beautiful fairy tale. From our silly jokes to our deep conversations, 
+                    every moment is precious. You're not just my girlfriend, you're my <span class="highlight">best friend</span>, 
+                    my <span class="highlight">partner in crime</span>, and the <span class="highlight">love of my life</span>.
+                    <br><br>
+                    Your smile brightens my darkest days, your laughter is my favorite song, 
+                    and your love is the greatest gift I've ever received.
+                </p>
+                
+                <div class="love-meter">
+                    <div class="love-fill" id="loveFill"></div>
+                </div>
+                <div class="love-text" id="loveText">My love for you: 0% (and growing!)</div>
+            </div>
+            
+            <h2 class="question">Do you love me too? ❤️</h2>
+            
+            <div class="buttons">
+                <button class="cute-btn yes-love-btn" id="yesLoveBtn">
+                    <i class="fas fa-heart"></i> Yes! I love you so much!
+                </button>
+                <button class="cute-btn no-love-btn" id="noLoveBtn">
+                    <i class="fas fa-question"></i> Maybe...?
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Marriage Proposal -->
+        <div class="step" id="step2">
+            <div class="ring-display">💍</div>
+            
+            <div class="proposal-box">
+                <p class="proposal-text">
+                    Now that I know you love me too...<br><br>
+                    <span class="highlight">[Devi ji]</span>, you've made me the happiest person in the world. 
+                    Every day with you is a blessing, and I want to wake up next to you for the rest of my life.
+                    <br><br>
+                    Will you make me the luckiest person alive and be my forever Valentine?
+                </p>
+            </div>
+            
+            <h2 class="question">Will you marry me? 💕👑</h2>
+            
+            <div class="buttons">
+                <button class="cute-btn yes-marry-btn" id="yesMarryBtn">
+                    <i class="fas fa-ring"></i> YES! Forever and always!
+                </button>
+                <button class="cute-btn no-marry-btn" id="noMarryBtn">
+                    <i class="fas fa-hourglass"></i> Let me think...
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Celebration Popup -->
+    <div class="celebration" id="celebration">
+        <div class="celebration-content">
+            <h1 style="font-size: 4rem; color: #ff4081; margin-bottom: 20px;">🎉 SHE SAID YES! 🎉</h1>
+            <p style="font-size: 2rem; color: #4CAF50; margin-bottom: 30px;">You're going to marry the love of your life!</p>
+            <div style="font-size: 5rem; margin-bottom: 20px;">💍👰🤵💑</div>
+            <p style="font-size: 1.5rem; color: #555; margin-bottom: 30px;">
+                This is just the beginning of our forever adventure together!
+            </p>
+            <button class="cute-btn yes-marry-btn" id="celebrateBtn" style="font-size: 1.8rem; padding: 20px 50px;">
+                <i class="fas fa-champagne-glasses"></i> Let's Celebrate!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Custom heart cursor
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.querySelector('.heart-cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+        
+        // Create clouds
+        function createClouds() {
+            const cloudBg = document.getElementById('cloud-bg');
+            const cloudCount = 8;
+            
+            for (let i = 0; i < cloudCount; i++) {
+                const cloud = document.createElement('div');
+                cloud.classList.add('cloud');
+                
+                const size = Math.random() * 150 + 100;
+                const top = Math.random() * 80;
+                const duration = Math.random() * 30 + 30;
+                const delay = Math.random() * 20;
+                
+                cloud.style.width = `${size}px`;
+                cloud.style.height = `${size * 0.5}px`;
+                cloud.style.top = `${top}%`;
+                cloud.style.left = `${Math.random() * 100 + 100}%`;
+                cloud.style.animationDuration = `${duration}s`;
+                cloud.style.animationDelay = `${delay}s`;
+                
+                cloudBg.appendChild(cloud);
+            }
+        }
+        
+        // Create floating hearts and stars
+        function createFloatingElements() {
+            const heartsContainer = document.getElementById('floating-hearts');
+            const starsContainer = document.getElementById('floating-stars');
+            const heartCount = 20;
+            const starCount = 15;
+            
+            // Hearts
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-element');
+                heart.innerHTML = '❤️';
+                
+                const left = Math.random() * 100;
+                const size = Math.random() * 25 + 15;
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 10;
+                
+                heart.style.left = `${left}%`;
+                heart.style.fontSize = `${size}px`;
+                heart.style.color = `hsl(${Math.random() * 30 + 330}, 100%, 65%)`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `${delay}s`;
+                
+                heartsContainer.appendChild(heart);
+            }
+            
+            // Stars
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('floating-element');
+                star.innerHTML = '⭐';
+                
+                const left = Math.random() * 100;
+                const size = Math.random() * 20 + 10;
+                const duration = Math.random() * 25 + 20;
+                const delay = Math.random() * 15;
+                
+                star.style.left = `${left}%`;
+                star.style.fontSize = `${size}px`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Chat bubbles animation
+        function showChatBubbles() {
+            setTimeout(() => {
+                document.getElementById('boy-bubble').classList.add('show');
+            }, 1000);
+            
+            setTimeout(() => {
+                document.getElementById('girl-bubble').classList.add('show');
+            }, 3000);
+        }
+        
+        // Love meter animation
+        function animateLoveMeter() {
+            const loveFill = document.getElementById('loveFill');
+            const loveText = document.getElementById('loveText');
+            let percent = 0;
+            
+            const interval = setInterval(() => {
+                percent += 1;
+                loveFill.style.width = `${percent}%`;
+                
+                if (percent <= 30) {
+                    loveText.textContent = `My love for you: ${percent}% (Just starting!)`;
+                } else if (percent <= 70) {
+                    loveText.textContent = `My love for you: ${percent}% (Growing stronger!)`;
+                } else if (percent <= 90) {
+                    loveText.textContent = `My love for you: ${percent}% (Almost there!)`;
+                } else {
+                    loveText.textContent = `My love for you: ${percent}% (Infinite love!)`;
+                }
+                
+                if (percent >= 100) {
+                    clearInterval(interval);
+                    loveText.innerHTML = `My love for you: <span style="color:#ff4081; font-size:1.8rem;">INFINITE! 💖</span>`;
+                }
+            }, 30);
+        }
+        
+        // Step 1: Love Confirmation
+        function setupStep1() {
+            const yesLoveBtn = document.getElementById('yesLoveBtn');
+            const noLoveBtn = document.getElementById('noLoveBtn');
+            
+            yesLoveBtn.addEventListener('click', function() {
+                // Animate the love meter to full if not already
+                document.getElementById('loveFill').style.width = '100%';
+                document.getElementById('loveText').innerHTML = `My love for you: <span style="color:#ff4081; font-size:1.8rem;">INFINITE! 💖</span>`;
+                
+                // Show cute reaction
+                createHeartsBurst();
+                
+                // Update girl's chat bubble
+                document.getElementById('girl-bubble').textContent = "I love you too! More than anything! 💕";
+                
+                // Move to step 2 after delay
+                setTimeout(() => {
+                    document.getElementById('step1').classList.remove('active');
+                    document.getElementById('step2').classList.add('active');
+                    
+                    // Update chat bubbles
+                    document.getElementById('boy-bubble').textContent = "Now for the most important question...";
+                    setTimeout(() => {
+                        document.getElementById('girl-bubble').textContent = "What is it? I'm all ears! 👂";
+                    }, 1500);
+                }, 2000);
+            });
+            
+            noLoveBtn.addEventListener('click', function() {
+                // Fun interaction - button moves around
+                const randomX = Math.random() * (window.innerWidth - 300);
+                const randomY = Math.random() * (window.innerHeight - 200);
+                
+                noLoveBtn.style.position = 'fixed';
+                noLoveBtn.style.left = `${randomX}px`;
+                noLoveBtn.style.top = `${randomY}px`;
+                
+                // Change text to encourage clicking yes
+                if (noLoveBtn.textContent.includes("Maybe...?")) {
+                    noLoveBtn.innerHTML = '<i class="fas fa-smile-wink"></i> Just kidding!';
+                    setTimeout(() => {
+                        noLoveBtn.innerHTML = '<i class="fas fa-heart"></i> Yes! I love you!';
+                        noLoveBtn.classList.remove('no-love-btn');
+                        noLoveBtn.classList.add('yes-love-btn');
+                    }, 1000);
+                }
+            });
+        }
+        
+        // Step 2: Marriage Proposal
+        function setupStep2() {
+            const yesMarryBtn = document.getElementById('yesMarryBtn');
+            const noMarryBtn = document.getElementById('noMarryBtn');
+            
+            yesMarryBtn.addEventListener('click', function() {
+                // Show celebration
+                document.getElementById('celebration').classList.add('active');
+                
+                // Create massive celebration
+                createCelebration();
+                
+                // Update characters
+                document.querySelector('.boy').style.transform = 'translateY(-50px)';
+                document.querySelector('.girl').style.transform = 'translateY(-50px)';
+                
+                // Update chat bubbles
+                document.getElementById('boy-bubble').textContent = "She said YES! I'm the luckiest man alive!";
+                document.getElementById('girl-bubble').textContent = "I can't wait to be your wife! 💍💕";
+            });
+            
+            noMarryBtn.addEventListener('mouseover', function() {
+                // Make the "no" button tricky
+                const maxX = window.innerWidth - noMarryBtn.offsetWidth;
+                const maxY = window.innerHeight - noMarryBtn.offsetHeight;
+                
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                noMarryBtn.style.position = 'fixed';
+                noMarryBtn.style.left = `${randomX}px`;
+                noMarryBtn.style.top = `${randomY}px`;
+                noMarryBtn.style.transition = 'left 0.3s, top 0.3s';
+            });
+            
+            noMarryBtn.addEventListener('click', function() {
+                // Change to yes after a few attempts
+                if (noMarryBtn.textContent.includes("Let me think...")) {
+                    noMarryBtn.innerHTML = '<i class="fas fa-heart"></i> OK maybe YES!';
+                    setTimeout(() => {
+                        noMarryBtn.innerHTML = '<i class="fas fa-ring"></i> YES! Of course YES!';
+                        noMarryBtn.classList.remove('no-marry-btn');
+                        noMarryBtn.classList.add('yes-marry-btn');
+                        
+                        // Trigger the celebration after a moment
+                        setTimeout(() => {
+                            yesMarryBtn.click();
+                        }, 1000);
+                    }, 800);
+                }
+            });
+        }
+        
+        // Celebration functions
+        function createHeartsBurst() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💖';
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = '25px';
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.top = `${Math.random() * 100}%`;
+                    heart.style.zIndex = '999';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = `floatElement 2s forwards`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+        
+        function createCelebration() {
+            // Create lots of celebration elements
+            const types = ['💖', '💕', '🎉', '🎊', '💍', '👰', '🤵', '🎈', '🥂', '💑'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const element = document.createElement('div');
+                    element.innerHTML = types[Math.floor(Math.random() * types.length)];
+                    element.style.position = 'fixed';
+                    element.style.fontSize = `${Math.random() * 30 + 20}px`;
+                    element.style.left = `${Math.random() * 100}%`;
+                    element.style.top = `${Math.random() * 100}%`;
+                    element.style.zIndex = '999';
+                    element.style.pointerEvents = 'none';
+                    element.style.animation = `floatElement ${Math.random() * 3 + 2}s forwards`;
+                    
+                    document.body.appendChild(element);
+                    
+                    setTimeout(() => {
+                        element.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+            
+            // Add click event to celebration button
+            document.getElementById('celebrateBtn').addEventListener('click', function() {
+                document.getElementById('celebration').classList.remove('active');
+                createHeartsBurst();
+            });
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createClouds();
+            createFloatingElements();
+            showChatBubbles();
+            animateLoveMeter();
+            setupStep1();
+            setupStep2();
+            
+            // Personalize with her name if provided in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const herName = urlParams.get('name');
+            if (herName) {
+                const nameElements = document.querySelectorAll('.highlight');
+                nameElements.forEach(el => {
+                    if (el.textContent === '[Her Name]') {
+                        el.textContent = herName;
+                    }
+                });
+            }
+        });
+        
+        // Make animals interactive
+        document.querySelectorAll('.animals').forEach(animal => {
+            animal.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+                
+                // Add a cute effect
+                const effect = document.createElement('div');
+                effect.innerHTML = '✨';
+                effect.style.position = 'fixed';
+                effect.style.fontSize = '30px';
+                effect.style.left = `${event.pageX}px`;
+                effect.style.top = `${event.pageY}px`;
+                effect.style.zIndex = '999';
+                effect.style.pointerEvents = 'none';
+                effect.style.animation = 'floatElement 1s forwards';
+                
+                document.body.appendChild(effect);
+                
+                setTimeout(() => {
+                    effect.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
